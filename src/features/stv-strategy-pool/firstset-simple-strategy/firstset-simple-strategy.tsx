@@ -3,6 +3,7 @@ import { Navigation, TAB } from '@/shared/wrapper/navigation';
 import { Dashboard } from './dashboard';
 import { Deposit } from './deposit';
 import { useFirstsetPosition } from './hooks';
+import { Withdrawal } from './withdrawal';
 
 const TABS: TAB[] = [
   {
@@ -14,6 +15,11 @@ const TABS: TAB[] = [
     label: 'Deposit',
     value: 'deposit',
     component: Deposit,
+  },
+  {
+    label: 'Withdraw',
+    value: 'withdraw',
+    component: Withdrawal,
   },
 ];
 
