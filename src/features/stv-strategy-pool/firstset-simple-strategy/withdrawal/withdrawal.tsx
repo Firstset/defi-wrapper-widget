@@ -9,6 +9,7 @@ import {
 import { WaitingTime } from '@/shared/wrapper/withdrawal/waiting-time';
 
 import { useFirstsetStrategy, useFirstsetWithdrawal } from '../hooks';
+import { WithdrawalRequests } from './withdrawal-requests';
 
 export const Withdrawal = () => {
   const { data: firstsetStrategy } = useFirstsetStrategy();
@@ -25,6 +26,10 @@ export const Withdrawal = () => {
           Nothing available to withdraw.
         </Text>
       )}
+
+      {/* Requests already filed against the stVault queue. Without this the page
+          reads as though a completed withdrawal never happened. */}
+      <WithdrawalRequests />
 
       {request && !request.isHealing && (
         <VaultInfo>

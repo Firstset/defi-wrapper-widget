@@ -1,3 +1,4 @@
+import { useRequests } from '@/modules/defi-wrapper';
 import { Navigation, TAB } from '@/shared/wrapper/navigation';
 
 import { Dashboard } from './dashboard';
@@ -25,11 +26,20 @@ const TABS: TAB[] = [
 
 export const FirstsetSimpleStrategy = () => {
   const { positionData } = useFirstsetPosition();
+  const { data: requests } = useRequests();
+
+  // Mirrors the Earn module: an outstanding queue request keeps the dashboard
+  // visible after the position itself has emptied. Keying only on position value
+  // makes the tab vanish the moment a withdrawal is filed, which is exactly when
+  // the user most wants to see it.
+  const hasOpenRequests =
+    (requests?.pending.length ?? 0) > 0 ||
+    (requests?.finalized.length ?? 0) > 0;
 
   return (
     <Navigation
       tabs={TABS}
-      showDashboard={!!positionData?.totalUserValueInEth}
+      showDashboard={hasOpenRequests || !!positionData?.totalUserValueInEth}
     />
   );
 };

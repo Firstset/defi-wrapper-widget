@@ -3,6 +3,7 @@ import {
   DashboardContainer,
 } from '@/shared/wrapper/dashboard';
 import { useFirstsetPosition } from '../hooks';
+import { WithdrawalRequests } from '../withdrawal';
 
 export const Dashboard = () => {
   const {
@@ -25,6 +26,9 @@ export const Dashboard = () => {
         usdAmount={totalUserValueInUsd}
         isAPYLoading={false}
       />
+      {/* Same view as the Withdraw tab. The dashboard stays visible while a queue
+          request is open, so it has to show the thing keeping it visible. */}
+      <WithdrawalRequests />
     </DashboardContainer>
   );
 };
