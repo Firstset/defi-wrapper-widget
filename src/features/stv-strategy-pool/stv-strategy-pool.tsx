@@ -16,6 +16,12 @@ const EarnStrategy = lazy(() =>
   })),
 );
 
+const FirstsetStrategy = lazy(() =>
+  import('./firstset-simple-strategy').then((mod) => ({
+    default: mod.FirstsetSimpleStrategy,
+  })),
+);
+
 export const StvStrategyPool = () => {
   const { strategyId } = useStvStrategy();
 
@@ -26,6 +32,12 @@ export const StvStrategyPool = () => {
       return (
         <Suspense fallback={<Loading />}>
           <EarnStrategy />
+        </Suspense>
+      );
+    case 'strategy.firstset.simple':
+      return (
+        <Suspense fallback={<Loading />}>
+          <FirstsetStrategy />
         </Suspense>
       );
     case 'strategy.ggv.v1':
